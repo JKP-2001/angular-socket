@@ -1,0 +1,29 @@
+<div class="border shadow-md  transition-all rounded-lg p-3 hover:cursor-pointer">
+    <div class="">
+        <div class="flex justify-between">
+            <div class="serialNumberAndTitle">
+                <h4 [ngClass]="!todo.active?'line-through':''">{{todo.id}}. {{todo.title}}</h4>
+            </div>
+
+            <div class="flex space-x-7">
+                <!-- <div class="hover:scale-105 px-2 py-1 font-bold bg-red-500 text-white rounded-md mb-2" (click)="onClick(todo)">Delete</div> -->
+                <div class="form-check mt-1">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" (change)="markDone(todo)" [checked]="!todo.active">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        Done
+                    </label>
+                </div>
+                <div class="hover:scale-105 px-2 py-1 font-bold bg-red-500 text-white rounded-md mb-2"
+                    (click)="onClick(todo)">Delete</div>
+            </div>
+
+        </div>
+
+
+        <h6 [ngClass]="!todo.active?'line-through':''">{{todo.desc}}</h6>
+
+
+    </div>
+
+
+</div>

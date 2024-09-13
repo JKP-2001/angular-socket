@@ -1,0 +1,15 @@
+<!-- <div class="modal-dialog modal-dialog-centered"> -->
+    <app-add-todo (addTodo)="addTodo($event)"></app-add-todo>
+  <!-- </div> -->
+
+<div *ngIf="todos.length!==0; else noTodoFound">
+  <ul class="container mt-4" *ngFor="let todo of todos">
+      <app-todo-items [todo]="todo" (deleteTodo)="deleteTheTodo($event)" (markDoneTodo)="markDoneTodo($event)"></app-todo-items>
+  </ul>
+</div>
+
+<ng-template #noTodoFound>
+  <div class="container mt-4">
+  <h3>No todo found</h3>
+</div>
+</ng-template>
