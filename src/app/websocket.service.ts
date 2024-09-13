@@ -1,5 +1,6 @@
 import { isPlatformBrowser } from '@angular/common';
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +11,7 @@ export class WebSocketService {
   private isBrowser: boolean;
   private userId : string = "";
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+  constructor(@Inject(PLATFORM_ID) private platformId: Object, public toastr:ToastrService) {
     this.isBrowser = isPlatformBrowser(this.platformId);
 
     if (this.isBrowser) {
@@ -45,7 +46,7 @@ export class WebSocketService {
       this.socket.onmessage = (event) => {
         console.log({event})
         console.log("Message from server ", event.data);
-        alert("Message from server "+ event.data);
+        this.showSuccess("Message from server "+ event.data)
       };
 
       this.socket.onclose = () => {
@@ -79,6 +80,13 @@ export class WebSocketService {
     } else {
       console.log("WebSocket is not open. Message not sent.");
     }
+  }
+
+  
+  showSuccess(message : string) {
+    this.toastr.success(message, 'Incoming Message', {
+      timeOut: 3000,
+    });
   }
 
 }

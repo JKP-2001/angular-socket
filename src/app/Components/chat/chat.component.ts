@@ -17,7 +17,7 @@ export class ChatComponent implements OnInit {
   messageInput: string = '';
   private messageSubscription: Subscription | undefined;
 
-  constructor(private webSocketService: WebSocketService) {}
+  constructor(private webSocketService: WebSocketService, public toastr:ToastrService) {}
 
   ngOnInit(): void {
     this.webSocketService.connectSocket();
@@ -34,9 +34,11 @@ export class ChatComponent implements OnInit {
 
   sendMessage(): void {
     
-      const message = `broadcast: Hello Google`; // Adjust message format as needed
+      // const message = `broadcast: Hello Google`; // Adjust message format as needed
+      const message = `private:${"916a-4f28-4e15-a427-45c3-214895"}:Message to you only`
       this.webSocketService.sendMessage(message);
-      this.messageInput = ''; // Clear input after sending
+      this.messageInput = ''; 
+      this.showSuccess(message);// Clear input after sending
     
   }
 
@@ -48,26 +50,26 @@ export class ChatComponent implements OnInit {
 
   
 
-  // showSuccess(message : string) {
-  //   this.toastr.success(message, 'Incoming Message', {
-  //     timeOut: 3000,
-  //   });
-  // }
-  // showError() {
-  //   this.toastr.error('everything is broken', 'Major Error', {
-  //     timeOut: 3000,
-  //   });
-  // }
-  // showInfo() {
-  //   this.toastr.info('everything is broken', 'Major Error', {
-  //     timeOut: 3000,
-  //   });
-  // }
-  // showWarning() {
-  //   this.toastr.warning('everything is broken', 'Major Error', {
-  //     timeOut: 3000,
-  //   });
-  // }
+  showSuccess(message : string) {
+    this.toastr.success(message, 'Incoming Message', {
+      timeOut: 3000,
+    });
+  }
+  showError() {
+    this.toastr.error('everything is broken', 'Major Error', {
+      timeOut: 3000,
+    });
+  }
+  showInfo() {
+    this.toastr.info('everything is broken', 'Major Error', {
+      timeOut: 3000,
+    });
+  }
+  showWarning() {
+    this.toastr.warning('everything is broken', 'Major Error', {
+      timeOut: 3000,
+    });
+  }
 
 
 }
